@@ -4,12 +4,24 @@ namespace Assignment2
 {
     internal class Program
     {
-        // static last transaction object
+        // Fields: stores shared program state
+        #region Fields
+
+        // Last saved SaleTransaction
         static SaleTransaction LastTransaction;
-        // static boolean whether for lastTransaction 
+        // Indicates whether there is a saved last transaction
         static bool HasLastTransaction = false;
 
-        // Method to create a new Transaction
+        #endregion
+
+        // Methods: user interactions and computations
+        #region Methods
+
+        /// <summary>
+        /// Prompts the user to enter transaction details, validates input,
+        /// creates a SaleTransaction, stores it as the last transaction,
+        /// and prints a brief summary (status, profit/loss amount and margin).
+        /// </summary>
         public void CreateTransaction()
         {
             Console.Write("Enter Invoice No: ");
@@ -76,7 +88,11 @@ namespace Assignment2
             Console.WriteLine("--------------------------------------------------");
         }
 
-        // Method to view Previous Transaction
+        /// <summary>
+        /// Displays the last saved transaction's details (invoice, customer, item,
+        /// quantities, amounts and computed profit/loss information). If none exists,
+        /// notifies the user.
+        /// </summary>
         public void ViewTransaction()
         {
             if (!HasLastTransaction)
@@ -98,7 +114,10 @@ namespace Assignment2
             Console.WriteLine("--------------------------------------");
         }
 
-        // Method to Recomputer aned show the output of profit or loss.
+        /// <summary>
+        /// Recomputes and prints whether the last transaction resulted in a profit,
+        /// a loss, or break-even. If no transaction is available, notifies the user.
+        /// </summary>
         public void ReCompute()
         {
             if (!HasLastTransaction)
@@ -115,6 +134,11 @@ namespace Assignment2
                 Console.WriteLine("Break-Even");
         }
 
+        /// <summary>
+        /// Application entry point. Presents a simple console menu to create/view/recompute
+        /// transactions or exit.
+        /// </summary>
+        /// <param name="args">Command-line arguments (not used).</param>
         public static void Main(string[] args)
         {
             Program p = new Program();
@@ -156,5 +180,6 @@ namespace Assignment2
                 }
             }
         }
+        #endregion
     }
 }
