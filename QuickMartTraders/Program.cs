@@ -14,8 +14,6 @@ namespace Assignment2
 
         #endregion
 
-        // Methods: user interactions and computations
-        #region Methods
 
         /// <summary>
         /// Prompts the user to enter transaction details, validates input,
@@ -24,6 +22,7 @@ namespace Assignment2
         /// </summary>
         public void CreateTransaction()
         {
+            #region Take input to create a new transaction
             Console.Write("Enter Invoice No: ");
             string? invoiceNo = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(invoiceNo))
@@ -68,6 +67,9 @@ namespace Assignment2
                 Console.WriteLine("Selling Amount must be greater than zero");
                 return;
             }
+            #endregion
+
+            #region create new sale transaction
 
             SaleTransaction sale = new SaleTransaction(
                 invoiceNo,
@@ -78,14 +80,19 @@ namespace Assignment2
                 sellingAmount
             );
 
+            #endregion
+
             LastTransaction = sale;
             HasLastTransaction = true;
+
+            #region Print Transaction Details
 
             Console.WriteLine("\nTransaction saved successfully.");
             Console.WriteLine($"Status: {sale.ProfitOrLossStatus}");
             Console.WriteLine($"Profit/Loss Amount: {sale.ProfitOrLossAmount}");
             Console.WriteLine($"Profit Margin (%): {sale.ProfitMarginPercent}");
             Console.WriteLine("--------------------------------------------------");
+            #endregion
         }
 
         /// <summary>
@@ -101,6 +108,8 @@ namespace Assignment2
                 return;
             }
 
+            #region Print Last Transaction
+
             Console.WriteLine("---------- Last Transaction ----------");
             Console.WriteLine($"Invoice No: {LastTransaction.InvoiceNo}");
             Console.WriteLine($"Customer Name: {LastTransaction.CustomerName}");
@@ -112,6 +121,7 @@ namespace Assignment2
             Console.WriteLine($"Profit/Loss Amount: {LastTransaction.ProfitOrLossAmount}");
             Console.WriteLine($"Profit Margin (%): {LastTransaction.ProfitMarginPercent}");
             Console.WriteLine("--------------------------------------");
+            #endregion
         }
 
         /// <summary>
@@ -138,38 +148,46 @@ namespace Assignment2
         /// Application entry point. Presents a simple console menu to create/view/recompute
         /// transactions or exit.
         /// </summary>
-        /// <param name="args">Command-line arguments (not used).</param>
         public static void Main(string[] args)
         {
+            #region Menu Loop initialization
             Program p = new Program();
             bool flag = true;
+            #endregion
 
+            #region Menu loop
             while (flag)
             {
+                #region Section to select option
                 Console.WriteLine("\n================ QuickMart Traders ================");
                 Console.WriteLine("1. Create New Transaction");
                 Console.WriteLine("2. View Last Transaction");
                 Console.WriteLine("3. Calculate Profit/Loss");
                 Console.WriteLine("4. Exit");
                 Console.Write("Enter your option: ");
-
+                #endregion
                 if (int.TryParse(Console.ReadLine(), out int choice))
                 {
                     switch (choice)
                     {
                         case 1:
+                            // create a new bill
                             p.CreateTransaction();
                             break;
                         case 2:
+                            // Display the most recent bill
                             p.ViewTransaction();
                             break;
                         case 3:
+                            // clear the last bill from memory
                             p.ReCompute();
                             break;
                         case 4:
+                            // Exit the application loop gracefully
                             flag = false;
                             break;
                         default:
+                            // Handle invalid menu options
                             Console.WriteLine("Invalid option");
                             break;
                     }
@@ -179,7 +197,7 @@ namespace Assignment2
                     Console.WriteLine("Enter a valid number");
                 }
             }
+            #endregion 
         }
-        #endregion
     }
 }

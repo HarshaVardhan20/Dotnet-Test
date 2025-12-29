@@ -17,7 +17,6 @@ namespace Assignment1
 
         #endregion
 
-        #region Methods
 
         /// <summary>
         /// Prompts the user for patient and billing inputs, validates them, creates a PatientBill and stores it as the last bill.
@@ -218,6 +217,5 @@ namespace Assignment1
             #endregion
         }
 
-        #endregion
     }
 }
